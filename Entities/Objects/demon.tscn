@@ -1,8 +1,68 @@
-[gd_scene load_steps=2 format=3 uid="uid://ldq88a5k3lav"]
+[gd_scene load_steps=6 format=3 uid="uid://ldq88a5k3lav"]
 
-[ext_resource type="Texture2D" uid="uid://bhow3stox5p1q" path="res://icon.svg" id="1_s4ova"]
+[ext_resource type="Texture2D" uid="uid://d4k7t7pb6o3rl" path="res://Entities/Objects/demon_1.png" id="1_tbx7a"]
+[ext_resource type="Script" path="res://Entities/Objects/demon.gd" id="2_bwmsw"]
+
+[sub_resource type="Animation" id="Animation_bkcra"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1.10076, 1.10076)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(954, 754)]
+}
+
+[sub_resource type="Animation" id="Animation_6amva"]
+resource_name = "idle"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2.03333, 3.03333, 4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1.10076, 1.10076), Vector2(1.10076, 1.15073), Vector2(1.10076, 1.05508), Vector2(1.10076, 1.10076)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_40npo"]
+_data = {
+"RESET": SubResource("Animation_bkcra"),
+"idle": SubResource("Animation_6amva")
+}
 
 [node name="Demon" type="Sprite2D"]
-texture = ExtResource("1_s4ova")
+position = Vector2(954, 754)
+scale = Vector2(1.10076, 1.10076)
+texture = ExtResource("1_tbx7a")
+offset = Vector2(-3.63385, -282.533)
+script = ExtResource("2_bwmsw")
 
-[node name="DemonAnim" type="AnimationPlayer" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_40npo")
+}
+autoplay = "idle"
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

@@ -9,6 +9,7 @@ func _ready() -> void:
 	
 	hide()
 	Globals.SearchStarted.connect(startSearch)
+	Globals.NewDay.connect(newDay)
 	max_value = searchDuration
 	value = 0
 	
@@ -23,14 +24,20 @@ func _process(delta: float) -> void:
 		
 		searchprogress += delta
 		value = searchprogress
+		
+		$"../BackgroundNight".self_modulate.a += delta / searchDuration
 		if searchprogress >= searchDuration:
 			endSearch()
 			
 			
 	pass
 	
+func newDay():
+	$"../BackgroundNight".hide()
+	
 func startSearch():
 	
+
 	Globals.isSearching = true
 	max_value = searchDuration
 	value = 0

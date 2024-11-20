@@ -11,7 +11,7 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	
-
+	$Panel2/DayLabel.text = "Day " + str(Globals.day)
 	moneyLabel.text = str(Globals.money)
 	reputationBar.value = Globals.reputation
 	pass
@@ -35,7 +35,7 @@ func move_to_demon() -> void:#
 func move_to_town() -> void:
 	Globals.emit_signal("screenChanged", "Town")
 	print("move to town screen!")
-	Globals.currentScreen = "Demon"
+	Globals.currentScreen = "Town"
 	
 	pass # Replace with function body.
 

@@ -33,6 +33,10 @@ func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("LeftMouse") and hover and !Globals.popUpOpen:
 		if canInteract:
 			open_location()
+			
+	
+	if Globals.demon_desired_location == locationName:
+		$DemonIcon.show()
 	pass
 	
 func on_hover():

@@ -39,6 +39,7 @@ var money = 14000			#money. Value here is the start amount.
 #---VIOL STATS----------------
 
 var demon_name = "Viol"		#name given to the demon by the player
+var demon_desired_location = "none"
 
 var viol_trust = 20			#how much the demon trusts you
 var angry_threshhold = 15 	#the threshhold under which the demon becomes angry and uncooperative

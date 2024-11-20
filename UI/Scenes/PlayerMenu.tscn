@@ -1,8 +1,119 @@
-[gd_scene load_steps=4 format=3 uid="uid://b02cf1mr7in4p"]
+[gd_scene load_steps=21 format=3 uid="uid://b02cf1mr7in4p"]
 
 [ext_resource type="Script" path="res://UI/Scenes/player_menu.gd" id="1_p8pdm"]
 [ext_resource type="Texture2D" uid="uid://bhow3stox5p1q" path="res://icon.svg" id="2_3ni7y"]
+[ext_resource type="Texture2D" uid="uid://qc4kkpfxrbox" path="res://UI/Assets/thorns.png" id="2_gm2ec"]
 [ext_resource type="Script" path="res://UI/Scenes/SceneButton.gd" id="2_hgb5a"]
+[ext_resource type="Texture2D" uid="uid://q70y8kmou3nt" path="res://UI/Assets/playerPanel.png" id="3_2pl0t"]
+[ext_resource type="Texture2D" uid="uid://ci8wgmwm721ju" path="res://UI/Assets/Intrigue_button.png" id="3_ht5r3"]
+[ext_resource type="Texture2D" uid="uid://bn667r3o8elfu" path="res://UI/Assets/playerPortrait.png" id="4_crdme"]
+[ext_resource type="Texture2D" uid="uid://bn58dwnwdrki4" path="res://UI/Assets/Intrigue_button_hover.png" id="4_r1k7m"]
+[ext_resource type="Texture2D" uid="uid://bi02nj01enuoq" path="res://UI/Assets/town_button.png" id="6_mlate"]
+[ext_resource type="Texture2D" uid="uid://bjnqf8ksmul5d" path="res://UI/Assets/town_button_hover.png" id="7_tt636"]
+[ext_resource type="Texture2D" uid="uid://6togmr006kp" path="res://UI/Assets/sleep_button.png" id="8_sqc83"]
+[ext_resource type="Texture2D" uid="uid://c8f4cvs38q6fc" path="res://UI/Assets/sleep_button_hover.png" id="9_6s81g"]
+[ext_resource type="Texture2D" uid="uid://bhk62j2v1151w" path="res://UI/Assets/demon_button.png" id="10_cg6xx"]
+[ext_resource type="Texture2D" uid="uid://b5osjxylg1ott" path="res://UI/Assets/demon_button_hover.png" id="11_ca5bc"]
+
+[sub_resource type="Animation" id="Animation_fbvsd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:skew")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_fxwce"]
+resource_name = "idle"
+length = 4.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.03333, 3.03333, 4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 1.21034), Vector2(1, 0.878504), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:skew")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.83333, 4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 0.204204, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_w2e8k"]
+_data = {
+"RESET": SubResource("Animation_fbvsd"),
+"idle": SubResource("Animation_fxwce")
+}
+
+[sub_resource type="Animation" id="Animation_v2751"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_2k51i"]
+resource_name = "idle"
+length = 3.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.23333, 2.96667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 0.960741), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ma41d"]
+_data = {
+"RESET": SubResource("Animation_v2751"),
+"idle": SubResource("Animation_2k51i")
+}
 
 [node name="PlayerMenu" type="Control"]
 layout_mode = 3
@@ -21,7 +132,77 @@ size_flags_vertical = 4
 mouse_filter = 2
 script = ExtResource("1_p8pdm")
 
-[node name="Panel" type="Panel" parent="."]
+[node name="Panel2" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -276.0
+offset_right = 617.0
+grow_vertical = 0
+mouse_filter = 2
+
+[node name="Thorns" type="Sprite2D" parent="Panel2"]
+position = Vector2(1345, 154.692)
+texture = ExtResource("2_gm2ec")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Panel2/Thorns"]
+libraries = {
+"": SubResource("AnimationLibrary_w2e8k")
+}
+autoplay = "idle"
+
+[node name="Sprite2D" type="Sprite2D" parent="Panel2"]
+position = Vector2(387, 61)
+scale = Vector2(0.882166, 0.937037)
+texture = ExtResource("3_2pl0t")
+
+[node name="DayLabel" type="Label" parent="Panel2"]
+layout_mode = 0
+offset_left = 307.0
+offset_top = -27.0
+offset_right = 487.0
+offset_bottom = 24.0
+theme_override_font_sizes/font_size = 30
+text = "Day 1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlayerPortrait" type="Sprite2D" parent="Panel2"]
+position = Vector2(127, 291.551)
+texture = ExtResource("4_crdme")
+offset = Vector2(13, -298)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Panel2/PlayerPortrait"]
+libraries = {
+"": SubResource("AnimationLibrary_ma41d")
+}
+autoplay = "idle"
+
+[node name="reputationBar" type="ProgressBar" parent="Panel2"]
+layout_mode = 0
+offset_left = 316.0
+offset_top = 196.0
+offset_right = 722.0
+offset_bottom = 223.0
+value = 50.0
+
+[node name="MoneyLabel" type="Label" parent="Panel2"]
+layout_mode = 0
+offset_left = 419.0
+offset_top = 95.0
+offset_right = 650.0
+offset_bottom = 162.0
+text = "14000"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MoneyIcon" type="Sprite2D" parent="Panel2/MoneyLabel"]
+position = Vector2(-47, 32)
+scale = Vector2(0.449118, 0.449118)
+texture = ExtResource("2_3ni7y")
+
+[node name="Panel" type="Control" parent="."]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -34,114 +215,65 @@ grow_horizontal = 0
 grow_vertical = 0
 mouse_filter = 2
 
-[node name="IntrigueButton" type="Button" parent="Panel"]
+[node name="IntrigueButton" type="TextureButton" parent="Panel"]
 layout_mode = 1
-offset_left = 378.0
-offset_top = 20.0
-offset_right = 513.0
-offset_bottom = 138.0
-text = "Intrigue"
+offset_left = 328.0
+offset_top = -63.0
+offset_right = 510.0
+offset_bottom = 122.0
+texture_normal = ExtResource("3_ht5r3")
+texture_pressed = ExtResource("4_r1k7m")
+texture_hover = ExtResource("4_r1k7m")
 script = ExtResource("2_hgb5a")
 sceneName = "Intrigue"
 
-[node name="TownButton" type="Button" parent="Panel"]
+[node name="TownButton" type="TextureButton" parent="Panel"]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -620.0
-offset_top = -60.0
-offset_right = -485.0
-offset_bottom = 58.0
+offset_left = -296.0
+offset_top = -134.0
+offset_right = -114.0
+offset_bottom = 51.0
 grow_horizontal = 0
 grow_vertical = 2
-text = "Town"
+texture_normal = ExtResource("6_mlate")
+texture_pressed = ExtResource("7_tt636")
+texture_hover = ExtResource("7_tt636")
 script = ExtResource("2_hgb5a")
 sceneName = "Town"
 
-[node name="EndDayButton" type="Button" parent="Panel"]
-visible = false
+[node name="EndDayButton" type="TextureButton" parent="Panel"]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -162.0
-offset_top = -60.0
-offset_right = -27.0
-offset_bottom = 58.0
+offset_left = -519.0
+offset_top = -165.0
+offset_right = -337.0
+offset_bottom = 20.0
 grow_horizontal = 0
 grow_vertical = 2
-text = "End Day"
+texture_normal = ExtResource("8_sqc83")
+texture_pressed = ExtResource("9_6s81g")
+texture_hover = ExtResource("9_6s81g")
 
-[node name="DemonButton" type="Button" parent="Panel"]
+[node name="DemonButton" type="TextureButton" parent="Panel"]
 layout_mode = 1
-offset_left = 532.0
-offset_top = 20.0
-offset_right = 667.0
-offset_bottom = 138.0
-text = "Demon"
+offset_left = 562.0
+offset_top = -68.0
+offset_right = 744.0
+offset_bottom = 117.0
+texture_normal = ExtResource("10_cg6xx")
+texture_pressed = ExtResource("11_ca5bc")
+texture_hover = ExtResource("11_ca5bc")
 script = ExtResource("2_hgb5a")
 sceneName = "Demon"
-
-[node name="Panel2" type="Panel" parent="."]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = -276.0
-offset_right = 617.0
-grow_vertical = 0
-mouse_filter = 2
-
-[node name="ColorRect" type="ColorRect" parent="Panel2"]
-layout_mode = 0
-offset_left = 262.0
-offset_top = -45.0
-offset_right = 578.0
-offset_bottom = 32.0
-color = Color(0, 0, 0, 1)
-
-[node name="Label" type="Label" parent="Panel2/ColorRect"]
-layout_mode = 0
-offset_left = 71.0
-offset_top = 11.0
-offset_right = 251.0
-offset_bottom = 62.0
-text = "Day 1"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="PlayerPortrait" type="Sprite2D" parent="Panel2"]
-position = Vector2(124, 46)
-scale = Vector2(1.72656, 2.92188)
-texture = ExtResource("2_3ni7y")
-
-[node name="reputationBar" type="ProgressBar" parent="Panel2"]
-layout_mode = 0
-offset_left = 269.0
-offset_top = 139.0
-offset_right = 562.0
-offset_bottom = 166.0
-value = 50.0
-
-[node name="MoneyLabel" type="Label" parent="Panel2"]
-layout_mode = 0
-offset_left = 343.0
-offset_top = 53.0
-offset_right = 574.0
-offset_bottom = 120.0
-text = "14000"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="MoneyIcon" type="Sprite2D" parent="Panel2/MoneyLabel"]
-position = Vector2(-47, 32)
-scale = Vector2(0.449118, 0.449118)
-texture = ExtResource("2_3ni7y")
 
 [connection signal="pressed" from="Panel/IntrigueButton" to="." method="move_to_intrigue"]
 [connection signal="pressed" from="Panel/TownButton" to="." method="move_to_town"]

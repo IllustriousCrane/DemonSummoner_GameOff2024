@@ -1,4 +1,4 @@
-extends Button
+extends TextureButton
 
 @export var sceneName : String
 
@@ -14,8 +14,15 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	
+	if disabled:
+		modulate.a = 0.4
+	
+	else:
+		modulate.a = 1
+	
 	if Globals.currentScreen == sceneName:
 		disabled = true
+	
 	pass
 
 func adapt_to_scene(screenName):
