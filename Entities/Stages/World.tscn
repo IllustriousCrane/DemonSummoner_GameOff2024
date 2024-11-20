@@ -1,0 +1,43 @@
+[gd_scene load_steps=9 format=3 uid="uid://bu0g73ontc2yx"]
+
+[ext_resource type="Script" path="res://Entities/Stages/hud.gd" id="1_u8q6y"]
+[ext_resource type="Script" path="res://Entities/Stages/world.gd" id="1_vwd0t"]
+[ext_resource type="PackedScene" uid="uid://c7l2nb4k6ttxg" path="res://Entities/Stages/Town.tscn" id="2_ks6im"]
+[ext_resource type="PackedScene" uid="uid://bgo0i3gx6ummt" path="res://UI/Scenes/PauseMenu.tscn" id="2_noj82"]
+[ext_resource type="PackedScene" uid="uid://b02cf1mr7in4p" path="res://UI/Scenes/PlayerMenu.tscn" id="3_va7im"]
+[ext_resource type="PackedScene" uid="uid://dc8nsi11fhwqp" path="res://Entities/Stages/SummoningRoom.tscn" id="4_508w4"]
+[ext_resource type="PackedScene" uid="uid://dwwcn8n0qmi6h" path="res://Entities/Stages/Intrigue.tscn" id="6_7ffdt"]
+[ext_resource type="Script" path="res://Entities/Stages/camera.gd" id="6_yr8tn"]
+
+[node name="World" type="Node2D"]
+script = ExtResource("1_vwd0t")
+
+[node name="HUD" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
+script = ExtResource("1_u8q6y")
+
+[node name="PlayerMenu" parent="HUD" instance=ExtResource("3_va7im")]
+offset_left = -965.0
+offset_top = -1083.0
+offset_right = 955.0
+offset_bottom = -3.0
+
+[node name="PauseMenu" parent="HUD" instance=ExtResource("2_noj82")]
+visible = false
+
+[node name="SummoningRoom" parent="." instance=ExtResource("4_508w4")]
+unique_name_in_owner = true
+position = Vector2(-1, 1)
+
+[node name="Town" parent="." instance=ExtResource("2_ks6im")]
+unique_name_in_owner = true
+position = Vector2(1914, 0)
+
+[node name="Intrigue" parent="." instance=ExtResource("6_7ffdt")]
+unique_name_in_owner = true
+position = Vector2(-1913, 0)
+
+[node name="Camera" type="Camera2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(960, 544)
+script = ExtResource("6_yr8tn")

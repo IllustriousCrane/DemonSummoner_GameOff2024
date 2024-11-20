@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://ldq88a5k3lav"]
+
+[ext_resource type="Texture2D" uid="uid://bhow3stox5p1q" path="res://icon.svg" id="1_s4ova"]
+
+[node name="Demon" type="Sprite2D"]
+texture = ExtResource("1_s4ova")
+
+[node name="DemonAnim" type="AnimationPlayer" parent="."]

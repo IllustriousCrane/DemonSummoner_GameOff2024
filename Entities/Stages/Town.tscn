@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=3 uid="uid://c7l2nb4k6ttxg"]
+
+[ext_resource type="PackedScene" uid="uid://83k7ormwibtq" path="res://Entities/Objects/TownLocations/LocationTemplate.tscn" id="1_b7r3d"]
+[ext_resource type="Script" path="res://Entities/Stages/search_progress.gd" id="2_g4e4i"]
+
+[node name="Town" type="Node2D"]
+
+[node name="Background" type="ColorRect" parent="."]
+offset_right = 1920.0
+offset_bottom = 1080.0
+mouse_filter = 2
+color = Color(0.239667, 0.439961, 0.446051, 1)
+
+[node name="LocationTemplate" parent="." instance=ExtResource("1_b7r3d")]
+position = Vector2(1336, 478)
+
+[node name="SearchProgress" type="ProgressBar" parent="."]
+visible = false
+offset_left = 387.0
+offset_top = 69.0
+offset_right = 1576.0
+offset_bottom = 176.0
+pivot_offset = Vector2(594, 46)
+size_flags_horizontal = 4
+show_percentage = false
+script = ExtResource("2_g4e4i")

@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://83k7ormwibtq"]
+
+[ext_resource type="Script" path="res://Entities/Objects/TownLocations/Location.gd" id="1_iwr8e"]
+[ext_resource type="Texture2D" uid="uid://bhow3stox5p1q" path="res://icon.svg" id="1_q71dc"]
+[ext_resource type="Script" path="res://Utilities/Data/location_church_data.gd" id="2_hh8gb"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nx430"]
+size = Vector2(136, 123)
+
+[node name="LocationTemplate" type="Node2D"]
+script = ExtResource("1_iwr8e")
+locationName = "Church"
+locationResource = ExtResource("2_hh8gb")
+
+[node name="LocationSprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_q71dc")
+
+[node name="ClickArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ClickArea"]
+position = Vector2(-1, -0.5)
+shape = SubResource("RectangleShape2D_nx430")
+
+[connection signal="mouse_entered" from="ClickArea" to="." method="on_hover"]
+[connection signal="mouse_exited" from="ClickArea" to="." method="stop_hover"]
