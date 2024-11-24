@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cgd6oqpsxg4yh"
+path="res://.godot/imported/Mouse Hover Glass B.wav-412491e0822eefcfe63b10d04945cd5e.sample"
+
+[deps]
+
+source_file="res://Sound/Mouse Hover Glass B.wav"
+dest_files=["res://.godot/imported/Mouse Hover Glass B.wav-412491e0822eefcfe63b10d04945cd5e.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

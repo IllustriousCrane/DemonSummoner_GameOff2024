@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://djpthuhkkwrf7"
+path="res://.godot/imported/Click Tick.wav-09c60c1dacf227074640c029cc2bd4b6.sample"
+
+[deps]
+
+source_file="res://Sound/Click Tick.wav"
+dest_files=["res://.godot/imported/Click Tick.wav-09c60c1dacf227074640c029cc2bd4b6.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

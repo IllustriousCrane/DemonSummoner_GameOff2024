@@ -24,8 +24,10 @@ func _ready() -> void:
 	chatIcon.hide()
 	
 	Globals.NewDay.connect(pickIntention)
+	sprite.texture = load(demonTextures[randi_range(0, demonTextures.size()-1)])
 
-	pickIntention()
+	if Globals.demon_desired_location == "none":
+		pickIntention()
 	pass # Replace with function body.
 
 

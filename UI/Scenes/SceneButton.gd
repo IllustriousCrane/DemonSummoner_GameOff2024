@@ -6,7 +6,9 @@ class_name SceneButton
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	Globals.screenChanged.connect(adapt_to_scene)
+	#Globals.screenChanged.connect(adapt_to_scene)
+
+	adapt_to_scene(Globals.currentScreen)
 
 	Globals.SearchEnded.connect(enable)
 	Globals.SearchStarted.connect(disable)
@@ -24,16 +26,10 @@ func _process(delta: float) -> void:
 	else:
 		modulate.a = 1
 	
-	if Globals.currentScreen == sceneName:
-		disabled = true
-	
-	pass
-
 func adapt_to_scene(screenName):
 	if screenName == sceneName:
 		disabled = true
-		if sceneName == "Demon":
-			$"../DemonButton/buttonAnim".play("RESET")
+	
 	else:
 		disabled = false
 	
@@ -43,3 +39,14 @@ func disable():
 func enable():
 	if Globals.currentScreen != sceneName:
 		disabled = false
+
+func set_pulse(enable):
+	#set to true or false:
+	if enable:
+		$buttonAnim.play("pulse")
+	else:
+		$buttonAnim.play("RESET")
+
+func _on_pressed():
+	
+	Audio.play_sound(Audio.click)

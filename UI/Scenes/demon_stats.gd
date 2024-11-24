@@ -15,7 +15,7 @@ func _ready() -> void:
 	_trust.value = Globals.demon_trust
 	
 	Globals.NewDay.connect(start_day)
-	Globals.screenChanged.connect(changeScene)
+	changeScene(Globals.currentScreen)
 	pass # Replace with function body.
 
 
@@ -55,11 +55,9 @@ func changeScene(screen):
 	match screen:
 		
 		"Demon": 
-			if !isVisible:
-				$AnimationPlayer.play("fade_in")
+			show()
 		"Town": 
-			if !isVisible:
-				$AnimationPlayer.play("fade_in")
+		
+			show()
 		"Intrigue":
-			$AnimationPlayer.play("fade_out")
-			isVisible = false
+			hide()

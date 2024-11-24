@@ -6,8 +6,9 @@ func _ready() -> void:
 	
 	disabled = true
 	
-	Globals.SearchEnded.connect(enable_end_day)
-	Globals.NewDay.connect(disable_end_day)
+	if Globals.dayOver:
+		disabled = false
+	
 	pass # Replace with function body.
 
 
@@ -26,3 +27,7 @@ func enable_end_day():
 	
 func disable_end_day():
 	disabled = true
+
+
+func _on_pressed() -> void:
+	pass # Replace with function body.

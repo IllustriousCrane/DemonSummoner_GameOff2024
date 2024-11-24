@@ -1,6 +1,8 @@
 extends Node
 
 
+var click = load("res://Sound/Click Glass Wet.wav")
+var hover = ["res://Sound/Mouse Hover Glass A.wav","res://Sound/Mouse Hover Glass B.wav","res://Sound/Mouse Hover Glass C.wav" ]
 @onready var tree := get_tree()
 
 

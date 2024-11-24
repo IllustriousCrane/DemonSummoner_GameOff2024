@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://b02cf1mr7in4p"]
+[gd_scene load_steps=30 format=3 uid="uid://b02cf1mr7in4p"]
 
 [ext_resource type="Script" path="res://UI/Scenes/player_menu.gd" id="1_p8pdm"]
 [ext_resource type="Texture2D" uid="uid://bhow3stox5p1q" path="res://icon.svg" id="2_3ni7y"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://q70y8kmou3nt" path="res://UI/Assets/playerPanel.png" id="3_2pl0t"]
 [ext_resource type="Texture2D" uid="uid://ci8wgmwm721ju" path="res://UI/Assets/Intrigue_button.png" id="3_ht5r3"]
 [ext_resource type="Texture2D" uid="uid://bn667r3o8elfu" path="res://UI/Assets/playerPortrait.png" id="4_crdme"]
+[ext_resource type="Texture2D" uid="uid://d4k7t7pb6o3rl" path="res://Entities/Objects/demon_1.png" id="4_ov1dv"]
 [ext_resource type="Texture2D" uid="uid://bn58dwnwdrki4" path="res://UI/Assets/Intrigue_button_hover.png" id="4_r1k7m"]
 [ext_resource type="Texture2D" uid="uid://bi02nj01enuoq" path="res://UI/Assets/town_button.png" id="6_mlate"]
 [ext_resource type="Texture2D" uid="uid://bjnqf8ksmul5d" path="res://UI/Assets/town_button_hover.png" id="7_tt636"]
@@ -76,6 +77,108 @@ tracks/1/keys = {
 _data = {
 "RESET": SubResource("Animation_fbvsd"),
 "idle": SubResource("Animation_fxwce")
+}
+
+[sub_resource type="Animation" id="Animation_tyrvd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(68, -214)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1.17889, 1.17889)]
+}
+
+[sub_resource type="Animation" id="Animation_panqu"]
+resource_name = "fade_in"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_e505p"]
+resource_name = "idle"
+length = 3.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.16667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(68, -214), Vector2(121, -154)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1.17889, 1.17889), Vector2(1.17889, 1.10675)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:self_modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1.73333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.596078)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yx1b8"]
+_data = {
+"RESET": SubResource("Animation_tyrvd"),
+"fade_in": SubResource("Animation_panqu"),
+"idle": SubResource("Animation_e505p")
 }
 
 [sub_resource type="Animation" id="Animation_v2751"]
@@ -206,6 +309,18 @@ text = "Day 1"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="demonSprite" type="Sprite2D" parent="Panel2"]
+self_modulate = Color(1, 1, 1, 0)
+position = Vector2(68, -214)
+rotation = 0.155063
+scale = Vector2(1.17889, 1.17889)
+texture = ExtResource("4_ov1dv")
+
+[node name="demonAnim" type="AnimationPlayer" parent="Panel2/demonSprite"]
+libraries = {
+"": SubResource("AnimationLibrary_yx1b8")
+}
+
 [node name="PlayerPortrait" type="Sprite2D" parent="Panel2"]
 position = Vector2(127, 291.551)
 texture = ExtResource("4_crdme")
@@ -265,6 +380,11 @@ texture_hover = ExtResource("4_r1k7m")
 script = ExtResource("2_hgb5a")
 sceneName = "Intrigue"
 
+[node name="buttonAnim" type="AnimationPlayer" parent="Panel/IntrigueButton"]
+libraries = {
+"": SubResource("AnimationLibrary_voy0p")
+}
+
 [node name="TownButton" type="TextureButton" parent="Panel"]
 layout_mode = 1
 anchors_preset = 6
@@ -272,10 +392,10 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -296.0
-offset_top = -134.0
-offset_right = -114.0
-offset_bottom = 51.0
+offset_left = -292.0
+offset_top = -160.0
+offset_right = -110.0
+offset_bottom = 25.0
 grow_horizontal = 0
 grow_vertical = 2
 texture_normal = ExtResource("6_mlate")
@@ -283,6 +403,11 @@ texture_pressed = ExtResource("7_tt636")
 texture_hover = ExtResource("7_tt636")
 script = ExtResource("2_hgb5a")
 sceneName = "Town"
+
+[node name="buttonAnim" type="AnimationPlayer" parent="Panel/TownButton"]
+libraries = {
+"": SubResource("AnimationLibrary_voy0p")
+}
 
 [node name="EndDayButton" type="TextureButton" parent="Panel"]
 layout_mode = 1
@@ -302,6 +427,11 @@ texture_pressed = ExtResource("9_6s81g")
 texture_hover = ExtResource("9_6s81g")
 script = ExtResource("13_1nvss")
 
+[node name="buttonAnim" type="AnimationPlayer" parent="Panel/EndDayButton"]
+libraries = {
+"": SubResource("AnimationLibrary_voy0p")
+}
+
 [node name="DemonButton" type="TextureButton" parent="Panel"]
 layout_mode = 1
 offset_left = 562.0
@@ -320,7 +450,16 @@ libraries = {
 "": SubResource("AnimationLibrary_voy0p")
 }
 
+[connection signal="animation_finished" from="Panel2/demonSprite/demonAnim" to="." method="_on_demon_anim_animation_finished"]
+[connection signal="mouse_entered" from="Panel/IntrigueButton" to="." method="play_hover"]
 [connection signal="pressed" from="Panel/IntrigueButton" to="." method="move_to_intrigue"]
+[connection signal="pressed" from="Panel/IntrigueButton" to="Panel/IntrigueButton" method="_on_pressed"]
+[connection signal="mouse_entered" from="Panel/TownButton" to="." method="play_hover"]
 [connection signal="pressed" from="Panel/TownButton" to="." method="move_to_town"]
+[connection signal="pressed" from="Panel/TownButton" to="Panel/TownButton" method="_on_pressed"]
+[connection signal="mouse_entered" from="Panel/EndDayButton" to="." method="play_hover"]
 [connection signal="pressed" from="Panel/EndDayButton" to="." method="EndDay"]
+[connection signal="pressed" from="Panel/EndDayButton" to="Panel/EndDayButton" method="_on_pressed"]
+[connection signal="mouse_entered" from="Panel/DemonButton" to="." method="play_hover"]
 [connection signal="pressed" from="Panel/DemonButton" to="." method="move_to_demon"]
+[connection signal="pressed" from="Panel/DemonButton" to="Panel/DemonButton" method="_on_pressed"]

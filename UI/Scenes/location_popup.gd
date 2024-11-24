@@ -11,6 +11,8 @@ func _ready() -> void:
 		$Panel/SearchButton.disabled = true
 		$Panel/NightAnnouncement.show()
 		$Panel/SearchButton.modulate.a = 0.4
+		
+
 	
 	pass # Replace with function body.
 
@@ -20,12 +22,16 @@ func _process(delta: float) -> void:
 	pass
 
 
-func set_up(locationName, locationDescription, callerID):
+func set_up(locationName, locationDescription, callerID, empty):
 	
 	Globals.popUpOpen = true
 	$Panel/Name.text = locationName
 	$Panel/Description.text = locationDescription
 	caller = callerID
+	
+	if empty:
+		$Panel/SearchButton.disabled = true
+		$Panel/SearchButton/Label.text = "There is nothing more to find here."
 	
 	#TODO: set up icons to indicate who the player might be able to obtain information of here
 	pass

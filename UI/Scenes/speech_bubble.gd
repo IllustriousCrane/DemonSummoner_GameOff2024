@@ -7,6 +7,8 @@ extends Control
 
 @onready var label = $BubbleContainer/MarginContainer/Label
 
+
+var dialogue_mode = false
 var text = ""
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -17,14 +19,19 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	
 	position.y -= floatSpeed * delta
+	
+	if dialogue_mode:
+		if get_parent().wait_to_continue and Input.is_action_just_pressed("LeftMouse"):
+			$TextAnim.play("fadeOut")
 	pass
 
 
-func initiate_text(dialogue):
+func initiate_text(dialogue, is_dialogue_mode := false):
 		
 	text = dialogue
 	label.text = text
 	
+	dialogue_mode = is_dialogue_mode
 	await $BubbleContainer.resized
 	
 	$BubbleContainer.custom_minimum_size.x = min($BubbleContainer.size.x, max_width)
@@ -58,7 +65,11 @@ func _on_text_anim_animation_finished(anim_name: StringName) -> void:
 
 
 func _on_text_timer_timeout() -> void:
-	print("Playing fade out")
-	$TextAnim.play("fadeOut")
-	get_parent().get_parent().canConverse = true
+	if !dialogue_mode:
+		print("Playing fade out")
+		$TextAnim.play("fadeOut")
+		get_parent().get_parent().canConverse = true
+	
+	else:
+		get_parent().wait_to_continue = true
 	pass # Replace with function body.

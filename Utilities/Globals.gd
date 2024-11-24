@@ -8,9 +8,11 @@ signal EndDay
 signal Evening			#marks the end of the day in so far as the player spends time on the map.
 signal screenChanged(screenName)
 
-
 signal SearchStarted
 signal SearchEnded
+
+signal DialogueStarted
+signal DialogueEnded
 
 #GLOBAL VARIABLES----------------------------------------------------------
 
@@ -20,12 +22,15 @@ var popUpOpen = false
 var isSearching = false
 var searchLocation = "none"
 
+var dayOver = false
+
 var actionChosen = false
 
 var currentScreen = "Demon"		# or: "Town" or "Intrigue"
 
 var HUD
 
+var newest_secret = "none"
 
 #----------------
 
@@ -54,6 +59,9 @@ var demon_energy = 50		#how much energy the demon has left
 
 var Secrets					 #Dictionary in which secrets is stored				
 var secrets_path = "res://Utilities/Data/Demon_Secrets_secretsData - Secrets.json"
+
+var active_secrets = []
+var archived_secrets = []
 
 #OPPONENTS-----------------------------------------------------------------
 
