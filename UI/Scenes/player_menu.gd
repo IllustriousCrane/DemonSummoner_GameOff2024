@@ -5,6 +5,8 @@ extends Control
 @onready var moneyLabel = $Panel2/MoneyLabel
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	
+	Globals.SearchEnded.connect(highlight_demon)
 	pass # Replace with function body.
 
 
@@ -18,6 +20,7 @@ func _process(delta: float) -> void:
 
 
 func move_to_intrigue() -> void:
+
 	print("Move to intrigue screen!")
 	Globals.emit_signal("screenChanged", "Intrigue")	
 	Globals.currentScreen = "Intrigue"
@@ -25,6 +28,7 @@ func move_to_intrigue() -> void:
 
 
 func move_to_demon() -> void:#
+
 	print("move to summoning screen!")
 	Globals.emit_signal("screenChanged", "Demon")
 	Globals.currentScreen = "Demon"
@@ -33,6 +37,7 @@ func move_to_demon() -> void:#
 
 
 func move_to_town() -> void:
+
 	Globals.emit_signal("screenChanged", "Town")
 	print("move to town screen!")
 	Globals.currentScreen = "Town"
@@ -42,4 +47,14 @@ func move_to_town() -> void:
 
 func EndDay() -> void:
 	print ("player is ending the day")
+
+	Globals.day += 1
+	Globals.emit_signal("NewDay")
+	Globals.searchLocation = "none"
+	Globals.actionChosen = false
+	
 	pass # Replace with function body.
+	
+func highlight_demon():
+	$Panel/DemonButton/buttonAnim.play("pulse")
+	pass

@@ -1,7 +1,100 @@
-[gd_scene load_steps=3 format=3 uid="uid://c6371lui1n2b2"]
+[gd_scene load_steps=10 format=3 uid="uid://c6371lui1n2b2"]
 
 [ext_resource type="Script" path="res://UI/Scenes/location_popup.gd" id="1_mo1n3"]
-[ext_resource type="Texture2D" uid="uid://bhow3stox5p1q" path="res://icon.svg" id="2_ihvpa"]
+[ext_resource type="Texture2D" uid="uid://dfsrhrww7io1x" path="res://UI/Assets/locationPanel.png" id="2_a5ucr"]
+[ext_resource type="Texture2D" uid="uid://bi02nj01enuoq" path="res://UI/Assets/town_button.png" id="3_7uk4v"]
+[ext_resource type="Texture2D" uid="uid://v2ovdakjn5wg" path="res://UI/Assets/Button_long.png" id="4_53gaw"]
+[ext_resource type="Texture2D" uid="uid://dd1brkq0pcdx2" path="res://UI/Assets/Button_long_hover.png" id="5_dtp2n"]
+
+[sub_resource type="Animation" id="Animation_4manj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Panel:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Panel:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_qqd7t"]
+resource_name = "fade_in"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Panel:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.466667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.338591, 0.338591), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Panel:modulate")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_yjv8m"]
+resource_name = "fade_in"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Panel:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.338591, 0.338591), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Panel:modulate")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_53iet"]
+_data = {
+"RESET": SubResource("Animation_4manj"),
+"fade_in": SubResource("Animation_qqd7t"),
+"fade_out": SubResource("Animation_yjv8m")
+}
 
 [node name="LocationPopup" type="Control"]
 layout_mode = 3
@@ -10,74 +103,146 @@ offset_right = 1920.0
 offset_bottom = 1080.0
 script = ExtResource("1_mo1n3")
 
-[node name="Panel" type="Panel" parent="."]
+[node name="Panel" type="Control" parent="."]
+modulate = Color(1, 1, 1, 0)
 layout_mode = 1
-offset_left = 127.0
-offset_top = 117.0
-offset_right = 712.0
-offset_bottom = 664.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 686.0
+offset_top = 119.0
+offset_right = -649.0
+offset_bottom = -414.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(263, 272)
+
+[node name="PanelSprite" type="Sprite2D" parent="Panel"]
+position = Vector2(271, 278)
+texture = ExtResource("2_a5ucr")
+
+[node name="buildingIcon" type="Sprite2D" parent="Panel"]
+position = Vector2(137, 127)
+scale = Vector2(1.44123, 1.71875)
+texture = ExtResource("3_7uk4v")
 
 [node name="Name" type="Label" parent="Panel"]
 layout_mode = 0
-offset_left = 210.0
-offset_top = 33.0
-offset_right = 568.0
-offset_bottom = 117.0
+offset_left = 189.0
+offset_top = -12.0
+offset_right = 547.0
+offset_bottom = 72.0
+theme_override_font_sizes/font_size = 25
 text = "Location Name"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Description" type="Label" parent="Panel"]
-layout_mode = 0
-offset_left = 212.0
-offset_top = 112.0
-offset_right = 562.0
-offset_bottom = 304.0
+layout_mode = 1
+anchors_preset = -1
+anchor_top = -0.052
+anchor_right = 0.908
+anchor_bottom = 1.078
+offset_left = 215.0
+offset_top = 103.444
+offset_right = -0.180054
+offset_bottom = -322.666
 text = "Description goes here"
 horizontal_alignment = 1
 autowrap_mode = 2
 
-[node name="Sprite2D" type="Sprite2D" parent="Panel"]
-position = Vector2(118, 158)
-scale = Vector2(1.28906, 1.71875)
-texture = ExtResource("2_ihvpa")
+[node name="NightAnnouncement" type="Label" parent="Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = -0.052
+anchor_right = 0.908
+anchor_bottom = 1.078
+offset_left = 51.0
+offset_top = 322.444
+offset_right = -21.1801
+offset_bottom = -252.666
+text = "You can't take any more actions today."
+horizontal_alignment = 1
+autowrap_mode = 2
 
-[node name="SearchButton" type="Button" parent="Panel"]
+[node name="SearchButton" type="TextureButton" parent="Panel"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -189.5
-offset_top = 59.5
-offset_right = 190.5
-offset_bottom = 137.5
+offset_left = -232.5
+offset_top = 65.5
+offset_right = 326.5
+offset_bottom = 187.5
 grow_horizontal = 2
 grow_vertical = 2
-text = "Search this Location"
+scale = Vector2(0.782011, 0.782011)
+texture_normal = ExtResource("4_53gaw")
+texture_pressed = ExtResource("5_dtp2n")
+texture_hover = ExtResource("5_dtp2n")
 
-[node name="LeaveButton" type="Button" parent="Panel"]
+[node name="Label" type="Label" parent="Panel/SearchButton"]
+layout_mode = 0
+offset_left = 20.4601
+offset_top = 19.1813
+offset_right = 530.46
+offset_bottom = 106.181
+theme_override_font_sizes/font_size = 25
+text = "Search Location for Secrets"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LeaveButton" type="TextureButton" parent="Panel"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -189.5
-offset_top = 152.5
-offset_right = 190.5
-offset_bottom = 230.5
+offset_left = -232.5
+offset_top = 172.5
+offset_right = 326.5
+offset_bottom = 294.5
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(0.790468, 0.790468)
+texture_normal = ExtResource("4_53gaw")
+texture_pressed = ExtResource("5_dtp2n")
+texture_hover = ExtResource("5_dtp2n")
+
+[node name="Label" type="Label" parent="Panel/LeaveButton"]
+layout_mode = 0
+offset_left = 20.4601
+offset_top = 19.1813
+offset_right = 530.46
+offset_bottom = 106.181
+theme_override_font_sizes/font_size = 25
 text = "Leave"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Icons_VBox" type="VBoxContainer" parent="Panel"]
-layout_mode = 0
-offset_left = 533.0
-offset_top = 44.0
-offset_right = 635.0
-offset_bottom = 419.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 240.5
+offset_top = -229.5
+offset_right = 342.5
+offset_bottom = 145.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_53iet")
+}
+autoplay = "fade_in"
 
 [connection signal="pressed" from="Panel/SearchButton" to="." method="start_search"]
 [connection signal="pressed" from="Panel/LeaveButton" to="." method="close"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

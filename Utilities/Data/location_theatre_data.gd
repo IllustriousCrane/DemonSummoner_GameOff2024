@@ -1,6 +1,6 @@
 extends Node
 
-var locationName = "The Church"
+var locationName = "The Theatre"
 var locationDescription = "Sinners huddle in the shadow of the clocktower."
 
 var available_secrets = ["secret1", "secret2", "secret3"]
@@ -14,14 +14,12 @@ func choose_secret():
 	
 	match secret:
 		#edit edge cases here to add level 1 or 2 secrets into a new pool
-		
 		pass
-	
+		
 	#ADD SECRET TO OPPONENT:
 	
 	var op = Globals.Secrets[secret].character_concerned
 	if op != "none":
 		Globals.Opponents[op].active_secrets.append(secret)
 	
-		
 	pass

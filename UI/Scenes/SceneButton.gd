@@ -1,13 +1,17 @@
 extends TextureButton
 
+class_name SceneButton
+
 @export var sceneName : String
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Globals.screenChanged.connect(adapt_to_scene)
-	
+
 	Globals.SearchEnded.connect(enable)
 	Globals.SearchStarted.connect(disable)
+	
+	
 	pass # Replace with function body.
 
 
@@ -28,6 +32,8 @@ func _process(delta: float) -> void:
 func adapt_to_scene(screenName):
 	if screenName == sceneName:
 		disabled = true
+		if sceneName == "Demon":
+			$"../DemonButton/buttonAnim".play("RESET")
 	else:
 		disabled = false
 	

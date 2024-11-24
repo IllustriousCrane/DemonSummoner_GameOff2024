@@ -1,6 +1,6 @@
 extends Node
 
-var locationName = "The Church"
+var locationName = "The Library"
 var locationDescription = "Sinners huddle in the shadow of the clocktower."
 
 var available_secrets = ["secret1", "secret2", "secret3"]
@@ -11,7 +11,6 @@ func choose_secret():
 	
 	available_secrets.erase(secret)
 	print("Chose secret: " + str(secret))
-	
 	match secret:
 		#edit edge cases here to add level 1 or 2 secrets into a new pool
 		

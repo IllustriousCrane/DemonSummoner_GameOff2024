@@ -1,0 +1,118 @@
+[gd_scene load_steps=11 format=3 uid="uid://byb7ea2nfpi0j"]
+
+[ext_resource type="Script" path="res://Entities/Stages/opponent_button.gd" id="1_hhip4"]
+[ext_resource type="Texture2D" uid="uid://cgta8tqnq7mpc" path="res://UI/Assets/portrait_clergyman.png" id="2_d6x5i"]
+[ext_resource type="Texture2D" uid="uid://d4bwuxq7jvoqh" path="res://UI/Assets/AttentionIcon.png" id="3_531ro"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m6vwu"]
+size = Vector2(251.475, 355.906)
+
+[sub_resource type="Animation" id="Animation_px7na"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.885342, 0.872902)]
+}
+
+[sub_resource type="Animation" id="Animation_0rest"]
+resource_name = "hover"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.133333, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0.885342, 0.872902), Vector2(1.01306, 0.99882), Vector2(0.885342, 0.872902)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4ff7s"]
+_data = {
+"RESET": SubResource("Animation_px7na"),
+"hover": SubResource("Animation_0rest")
+}
+
+[sub_resource type="Animation" id="Animation_h7f5k"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.807143, 0.807143)]
+}
+
+[sub_resource type="Animation" id="Animation_1gvct"]
+resource_name = "idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.533333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.807143, 0.807143), Vector2(0.610067, 0.610067)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_3toom"]
+_data = {
+"RESET": SubResource("Animation_h7f5k"),
+"idle": SubResource("Animation_1gvct")
+}
+
+[node name="opponentButton" type="Node2D"]
+position = Vector2(55, 100)
+rotation = -0.00551334
+script = ExtResource("1_hhip4")
+
+[node name="Portrait" type="Sprite2D" parent="."]
+position = Vector2(184.872, 205.022)
+scale = Vector2(0.885342, 0.872902)
+texture = ExtResource("2_d6x5i")
+
+[node name="opponent_click_area" type="Area2D" parent="Portrait"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Portrait/opponent_click_area"]
+position = Vector2(-3.0125, -1.76834)
+shape = SubResource("RectangleShape2D_m6vwu")
+
+[node name="portrait_anim" type="AnimationPlayer" parent="Portrait"]
+libraries = {
+"": SubResource("AnimationLibrary_4ff7s")
+}
+
+[node name="AttentionIcon" type="Sprite2D" parent="."]
+position = Vector2(313.995, 1.73118)
+rotation = 0.044025
+scale = Vector2(0.807143, 0.807143)
+texture = ExtResource("3_531ro")
+
+[node name="attention_anim" type="AnimationPlayer" parent="AttentionIcon"]
+libraries = {
+"": SubResource("AnimationLibrary_3toom")
+}
+autoplay = "idle"
+
+[connection signal="mouse_entered" from="Portrait/opponent_click_area" to="." method="_on_opponent_click_area_mouse_entered"]
+[connection signal="mouse_exited" from="Portrait/opponent_click_area" to="." method="_on_opponent_click_area_mouse_exited"]

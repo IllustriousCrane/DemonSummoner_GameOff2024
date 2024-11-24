@@ -18,6 +18,9 @@ var menuOpen = false
 var popUpOpen = false
 
 var isSearching = false
+var searchLocation = "none"
+
+var actionChosen = false
 
 var currentScreen = "Demon"		# or: "Town" or "Intrigue"
 
@@ -41,16 +44,16 @@ var money = 14000			#money. Value here is the start amount.
 var demon_name = "Viol"		#name given to the demon by the player
 var demon_desired_location = "none"
 
-var viol_trust = 20			#how much the demon trusts you
+var demon_trust = 20			#how much the demon trusts you
 var angry_threshhold = 15 	#the threshhold under which the demon becomes angry and uncooperative
-var viol_energy = 50		#how much energy the demon has left
+var demon_energy = 50		#how much energy the demon has left
 
 
 
 #SECRETS------------------------------------------------------------------
 
 var Secrets					 #Dictionary in which secrets is stored				
-var secrets_path
+var secrets_path = "res://Utilities/Data/Demon_Secrets_secretsData - Secrets.json"
 
 #OPPONENTS-----------------------------------------------------------------
 
@@ -61,24 +64,30 @@ var Opponents = {
 		"o_name" = "Clergyman",
 		"o_description" = "A gluttonous hypocrite appealing to the masses sheepish desire for absolution.",
 		"o_reputation" = 10,
-		"portrait_path" = "res://icon.svg",
-		"icon_path" = "res://icon.svg"
+		"portrait_path" = "res://UI/Assets/portrait_clergyman.png",
+		"icon_path" = "res://UI/Assets/clergyman_icon.png",
+		"active_secrets" = [],
+		"archived_secrets" = []
 	},
 	"treasurer": {
 		
 		"o_name" = "Treasurer",
 		"o_description" = "Greedy, calculating, ambitious.",
 		"o_reputation" = 10,
-		"portrait_path" = "res://icon.svg",
-		"icon_path" = "res://icon.svg"
+		"portrait_path" = "res://UI/Assets/portrait_treasurer.png",
+		"icon_path" = "res://UI/Assets/treasurer_icon.png",
+		"active_secrets" = [],
+		"archived_secrets" = []
 	},
 	"marshal": {
 		
 		"o_name" = "Marshal",
 		"o_description" = "A blunt tool, war-mongering and ruthless.",
 		"o_reputation" = 10,
-		"portrait_path" = "res://icon.svg",
-		"icon_path" = "res://icon.svg"
+		"portrait_path" = "res://UI/Assets/portrait_marshal.png",
+		"icon_path" = "res://UI/Assets/marshal_icon.png",
+		"active_secrets" = [],
+		"archived_secrets" = []
 	},
 	
 }
@@ -90,7 +99,8 @@ func _ready() -> void:
 
 	#Load in our secret data:
 	
-	#Secrets = load_json_data_from_scratch(secrets_path)
+	Secrets = load_json_data_from_scratch(secrets_path)
+
 	pass # Replace with function body.
 
 

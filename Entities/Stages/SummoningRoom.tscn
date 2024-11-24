@@ -40,3 +40,4 @@ visibility_rect = Rect2(-900, -800, 1800, 1000)
 trail_lifetime = 10.0
 
 [node name="Demon" parent="." instance=ExtResource("1_dtwlq")]
+position = Vector2(954, 758)

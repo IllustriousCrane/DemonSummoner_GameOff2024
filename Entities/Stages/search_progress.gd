@@ -48,8 +48,8 @@ func endSearch():
 
 	searchprogress = 0
 	value = 0
-	
-	Globals.isSearching = false
 	Globals.emit_signal("SearchEnded")
+	Globals.isSearching = false
+
 	hide()
 	print("ready search results!")

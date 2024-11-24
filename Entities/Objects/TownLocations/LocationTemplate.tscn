@@ -1,12 +1,65 @@
-[gd_scene load_steps=9 format=3 uid="uid://83k7ormwibtq"]
+[gd_scene load_steps=12 format=3 uid="uid://83k7ormwibtq"]
 
 [ext_resource type="Script" path="res://Entities/Objects/TownLocations/Location.gd" id="1_iwr8e"]
-[ext_resource type="Texture2D" uid="uid://bhow3stox5p1q" path="res://icon.svg" id="1_q71dc"]
 [ext_resource type="Script" path="res://Utilities/Data/location_church_data.gd" id="2_hh8gb"]
+[ext_resource type="Texture2D" uid="uid://cdgoaomfndrig" path="res://UI/Assets/EyeIcon.png" id="3_qkj4x"]
 [ext_resource type="Texture2D" uid="uid://bhk62j2v1151w" path="res://UI/Assets/demon_button.png" id="4_vcsdp"]
+
+[sub_resource type="Animation" id="Animation_r2uhw"]
+resource_name = "idl"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.666667, 1.33333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 10), Vector2(0, -8)]
+}
+
+[sub_resource type="Animation" id="Animation_cgdtl"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_x53mf"]
+_data = {
+"RESET": SubResource("Animation_cgdtl"),
+"idle": SubResource("Animation_r2uhw")
+}
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nx430"]
 size = Vector2(136, 123)
+
+[sub_resource type="Animation" id="Animation_he1xn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(3, -126)]
+}
 
 [sub_resource type="Animation" id="Animation_o0xxj"]
 resource_name = "idle"
@@ -24,21 +77,6 @@ tracks/0/keys = {
 "values": [Vector2(3, -126), Vector2(1, -110), Vector2(3, -126)]
 }
 
-[sub_resource type="Animation" id="Animation_he1xn"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(3, -126)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7pgjs"]
 _data = {
 "RESET": SubResource("Animation_he1xn"),
@@ -51,8 +89,13 @@ locationName = "Church"
 locationResource = ExtResource("2_hh8gb")
 
 [node name="LocationSprite" type="Sprite2D" parent="."]
-self_modulate = Color(1, 1, 1, 0.0117647)
-texture = ExtResource("1_q71dc")
+texture = ExtResource("3_qkj4x")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="LocationSprite"]
+libraries = {
+"": SubResource("AnimationLibrary_x53mf")
+}
+autoplay = "idle"
 
 [node name="ClickArea" type="Area2D" parent="."]
 
@@ -60,13 +103,16 @@ texture = ExtResource("1_q71dc")
 position = Vector2(-1, -0.5)
 shape = SubResource("RectangleShape2D_nx430")
 
-[node name="DemonIcon" type="Sprite2D" parent="."]
+[node name="Icon" type="Node2D" parent="."]
+position = Vector2(-46, 21)
+
+[node name="DemonIcon" type="Sprite2D" parent="Icon"]
 visible = false
 position = Vector2(3, -126)
 scale = Vector2(0.482804, 0.482804)
 texture = ExtResource("4_vcsdp")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="DemonIcon"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Icon/DemonIcon"]
 libraries = {
 "": SubResource("AnimationLibrary_7pgjs")
 }

@@ -1,0 +1,133 @@
+[gd_scene load_steps=6 format=3 uid="uid://csf15i5381sod"]
+
+[ext_resource type="Script" path="res://UI/Scenes/demon_stats.gd" id="1_qefti"]
+
+[sub_resource type="Animation" id="Animation_mggcj"]
+resource_name = "fade_in"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_rmwte"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_6tfx8"]
+resource_name = "fade_out"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5x7bo"]
+_data = {
+"RESET": SubResource("Animation_rmwte"),
+"fade_in": SubResource("Animation_mggcj"),
+"fade_out": SubResource("Animation_6tfx8")
+}
+
+[node name="DemonStats" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_qefti")
+
+[node name="Control" type="Control" parent="."]
+custom_minimum_size = Vector2(1920, 1080)
+layout_mode = 1
+anchors_preset = 0
+offset_right = 1.0
+mouse_filter = 2
+
+[node name="Vitality" type="ProgressBar" parent="Control"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -1877.0
+offset_top = 82.0
+offset_right = -1330.0
+offset_bottom = 109.0
+grow_horizontal = 0
+scale = Vector2(0.8, 0.8)
+page = 20.0
+value = 20.0
+rounded = true
+
+[node name="Label" type="Label" parent="Control/Vitality"]
+layout_mode = 0
+offset_top = -33.0
+offset_right = 214.0
+offset_bottom = -10.0
+scale = Vector2(0.8, 0.8)
+text = "Vitality"
+
+[node name="Trust" type="ProgressBar" parent="Control"]
+layout_mode = 1
+offset_left = 45.0
+offset_top = 144.0
+offset_right = 592.0
+offset_bottom = 171.0
+scale = Vector2(0.8, 0.8)
+value = 20.0
+
+[node name="Label" type="Label" parent="Control/Trust"]
+offset_top = -33.0
+offset_right = 214.0
+offset_bottom = -10.0
+scale = Vector2(0.8, 0.8)
+text = "Trust"
+
+[node name="DemonName" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -1765.0
+offset_top = 25.0
+offset_right = -1512.0
+offset_bottom = 75.0
+grow_horizontal = 0
+scale = Vector2(0.8, 0.8)
+theme_override_font_sizes/font_size = 35
+text = "Viol"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_5x7bo")
+}
+autoplay = "fade_in"

@@ -1,34 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://ldq88a5k3lav"]
+[gd_scene load_steps=11 format=3 uid="uid://ldq88a5k3lav"]
 
 [ext_resource type="Texture2D" uid="uid://d4k7t7pb6o3rl" path="res://Entities/Objects/demon_1.png" id="1_tbx7a"]
 [ext_resource type="Script" path="res://Entities/Objects/demon.gd" id="2_bwmsw"]
+[ext_resource type="Texture2D" uid="uid://cdv7qsav12na6" path="res://UI/Assets/chat_icon.png" id="3_8v1ef"]
 
 [sub_resource type="Animation" id="Animation_bkcra"]
 length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1.10076, 1.10076)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(954, 754)]
-}
 
 [sub_resource type="Animation" id="Animation_6amva"]
 resource_name = "idle"
@@ -52,17 +29,77 @@ _data = {
 "idle": SubResource("Animation_6amva")
 }
 
-[node name="Demon" type="Sprite2D"]
-position = Vector2(954, 754)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mpk71"]
+size = Vector2(380.646, 516.923)
+
+[sub_resource type="Animation" id="Animation_ak7s5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-5.45079, -244.377)]
+}
+
+[sub_resource type="Animation" id="Animation_d82ym"]
+resource_name = "chatIcon"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.533333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-158.073, -479.584), Vector2(-157.164, -446.412)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ucsyt"]
+_data = {
+"RESET": SubResource("Animation_ak7s5"),
+"chatIcon": SubResource("Animation_d82ym")
+}
+
+[node name="Demon" type="Node2D"]
+script = ExtResource("2_bwmsw")
+
+[node name="DemonSprite" type="Sprite2D" parent="."]
+position = Vector2(2, -6.00006)
 scale = Vector2(1.10076, 1.10076)
 texture = ExtResource("1_tbx7a")
 offset = Vector2(-3.63385, -282.533)
-script = ExtResource("2_bwmsw")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="DemonSprite"]
 libraries = {
 "": SubResource("AnimationLibrary_40npo")
 }
 autoplay = "idle"
 
-[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[node name="DemonClickArea" type="Area2D" parent="DemonSprite"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DemonSprite/DemonClickArea"]
+position = Vector2(3.17963, -248.461)
+shape = SubResource("RectangleShape2D_mpk71")
+
+[node name="ChatIcon" type="Sprite2D" parent="DemonSprite"]
+position = Vector2(-5.45079, -244.377)
+texture = ExtResource("3_8v1ef")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="DemonSprite/ChatIcon"]
+libraries = {
+"": SubResource("AnimationLibrary_ucsyt")
+}
+autoplay = "chatIcon"
+
+[connection signal="animation_finished" from="DemonSprite/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[connection signal="mouse_entered" from="DemonSprite/DemonClickArea" to="." method="_on_demon_click_area_mouse_entered"]
+[connection signal="mouse_exited" from="DemonSprite/DemonClickArea" to="." method="_on_demon_click_area_mouse_exited"]

@@ -46,46 +46,8 @@ func teleport_to_scene(target, targetNode):
 	$SceneTransitionAnimation.play_backwards("dissolve")
 	Globals.Paused = false
 	
-func transitionTime(currentDay, currentTime):
-	
-	Globals.Paused = true
-	Globals.Transitioning = true
-	
-	var newDay = currentDay + 1
-	
-	var newTime = ""
+func fade_no_scene_change():
 
-	match currentTime:
-		"morning":
-			newTime = "afternoon"
-			$DayLabel.text = "Day " + str(currentDay)
-	
-			$TimeLabel.text = "Afternoon"
-		"afternoon": 
-			newTime = "evening"
-			$TimeLabel.text = "Evening"
-			$DayLabel.text = "Day " + str(currentDay)
-		"evening": 
-			newTime = "morning" 
-			$TimeLabel.text = "Morning"
-			$DayLabel.text = "Day " + str(newDay)
-		
 	$SceneTransitionAnimation.play("dissolve")
 	await $SceneTransitionAnimation.animation_finished
-	
-	#set new day/time
-
-	Globals.changeTime(newTime)
-
-	
-
-	#if new day, move us back to the house
-	
-	$SceneTransitionAnimation.play("fadeText")
-	await get_tree().create_timer(5.0).timeout
-	$SceneTransitionAnimation.play_backwards("fadeText")
-	await $SceneTransitionAnimation.animation_finished
 	$SceneTransitionAnimation.play_backwards("dissolve")
-
-	Globals.Paused = false
-	Globals.Transitioning = false
